@@ -18,4 +18,4 @@ python manage.py runserver
 
 ```
 
-take a look at [Django app on localhost](<[https://](http://127.0.0.1:8000/)>)
+take a look at [Django app on localhost](http://127.0.0.1:8000/)

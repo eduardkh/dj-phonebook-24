@@ -25,3 +25,10 @@ take a look at [Django app on localhost](http://127.0.0.1:8000/)
 ```powershell
 python manage.py startapp phonebook_app
 ```
+
+> add models and migrate
+
+```powershell
+python manage.py makemigrations
+python manage.py migrate
+```

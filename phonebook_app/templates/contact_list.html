@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Contacts{% endblock %} {% block content %}
+<h1 class="text-3xl font-bold mb-4">Contacts</h1>
+<a href="{% url 'contact_create' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >Add Contact</a
+>
+<ul class="space-y-4 mt-4">
+  {% for contact in contacts %}
+  <li class="bg-white p-4 rounded-lg shadow-md">
+    <strong class="text-xl"
+      ><a href="{% url 'contact_detail' contact.pk %}">{{ contact.first_name }} {{ contact.last_name }}</a></strong
+    ><br />
+    Company: {{ contact.company }}<br />
+    Job Title: {{ contact.job_title }}<br />
+    Description: {{ contact.description }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

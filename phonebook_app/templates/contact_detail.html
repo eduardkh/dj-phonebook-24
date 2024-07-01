@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Contact Detail{% endblock %} {% block content %}
+<h1 class="text-3xl font-bold mb-4">{{ contact.first_name }} {{ contact.last_name }}</h1>
+<p>Company: {{ contact.company }}</p>
+<p>Job Title: {{ contact.job_title }}</p>
+<p>Description: {{ contact.description }}</p>
+
+<h2 class="text-2xl font-bold mt-4">Phone Numbers</h2>
+<ul>
+  {% for phone in contact.phone_numbers.all %}
+  <li>{{ phone.get_phone_type_display }}: {{ phone.number }}</li>
+  {% endfor %}
+</ul>
+
+<h2 class="text-2xl font-bold mt-4">Email Addresses</h2>
+<ul>
+  {% for email in contact.email_addresses.all %}
+  <li>{{ email.email }}</li>
+  {% endfor %}
+</ul>
+
+<a
+  href="{% url 'contact_update' contact.pk %}"
+  class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+  >Edit</a
+>
+<form action="{% url 'contact_delete' contact.pk %}" method="post" style="display: inline">
+  {% csrf_token %}
+  <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+</form>
+<a href="{% url 'contact_list' %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Back</a>
+{% endblock %}

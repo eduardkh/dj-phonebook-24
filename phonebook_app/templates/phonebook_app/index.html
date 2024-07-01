@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>hello world</h1>
-    <a href="{% url 'index' %}">Home</a>
-    <h1>Contacts</h1>
+{% extends "base.html" %} {% block title %}Contacts{% endblock %} {% block content %}
+<h1>Contacts</h1>
+<ul>
+  {% for contact in contacts %}
+  <li>
+    <strong>{{ contact.first_name }} {{ contact.last_name }}</strong><br />
+    Company: {{ contact.company }}<br />
+    Job Title: {{ contact.job_title }}<br />
+    Description: {{ contact.description }}<br />
+    <strong>Phone Numbers:</strong>
     <ul>
-      {% for contact in contacts %}
-      <li>
-        <strong>{{ contact.first_name }} {{ contact.last_name }}</strong><br />
-        Company: {{ contact.company }}<br />
-        Job Title: {{ contact.job_title }}<br />
-        Description: {{ contact.description }}<br />
-        <strong>Phone Numbers:</strong>
-        <ul>
-          {% for phone in contact.phone_numbers.all %}
-          <li>{{ phone.get_phone_type_display }}: {{ phone.number }}</li>
-          {% endfor %}
-        </ul>
-        <strong>Email Addresses:</strong>
-        <ul>
-          {% for email in contact.email_addresses.all %}
-          <li>{{ email.email }}</li>
-          {% endfor %}
-        </ul>
-      </li>
+      {% for phone in contact.phone_numbers.all %}
+      <li>{{ phone.get_phone_type_display }}: {{ phone.number }}</li>
       {% endfor %}
     </ul>
-  </body>
-</html>
+    <strong>Email Addresses:</strong>
+    <ul>
+      {% for email in contact.email_addresses.all %}
+      <li>{{ email.email }}</li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
